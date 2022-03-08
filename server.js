@@ -7,6 +7,7 @@ const Fruit = require('./models/fruits.js')
 const app = express();
 
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000
 
 //MUST BE FIRST
 app.use((req,res,next)=>{
@@ -98,6 +99,6 @@ mongoose.connection.once('open', ()=> {
     console.log('connected to mongo');
 })
 
-app.listen(3000, () => {
-    console.log('listening');
-})
+app.listen(PORT, () => {
+    console.log('We in the building', PORT)
+  })
