@@ -15,7 +15,7 @@ app.use((req,res,next)=>{
     next()
 })
 //keep this near the top
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 
 
@@ -101,4 +101,4 @@ mongoose.connection.once('open', ()=> {
 
 app.listen(PORT, () => {
     console.log('We in the building', PORT)
-  })
+})
