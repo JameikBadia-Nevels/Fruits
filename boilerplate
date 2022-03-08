@@ -1,0 +1,3 @@
+//in .env
+MONGO_URI = mongodb+srv://MeikMan:OrangeCider728@clustermeik.wbicw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
