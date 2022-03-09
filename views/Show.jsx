@@ -7,7 +7,7 @@ class Show extends React.Component{
         return(
             <div>
             <h1>Show Page</h1>
-           The {this.props.fruit.name} is {this.props.fruit.color}
+           The {this.props.fruit.name} is {this.props.fruit.color} and is {this.props.fruit.readyToEat}
             </div>
         )
     }
