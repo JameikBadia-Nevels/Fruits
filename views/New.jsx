@@ -2,7 +2,8 @@ const React = require('react')
 
 class New extends React.Component{
     render(){
-        return (<div>New Page
+        return (<div>
+             <link rel="stylesheet" href="/css/app.css"/>  New Page
             <h1>New Fruit Page</h1>
             <form action = "/fruits" method = "POST">
                 Name:<input type = "text" name = "name" /> <br></br>

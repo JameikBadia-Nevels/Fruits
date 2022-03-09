@@ -7,6 +7,12 @@ const Fruit = require('./models/fruits.js')
 const app = express();
 
 const mongoose = require('mongoose');
+
+const { findByIdAndRemove } = require('./models/fruits.js');
+
+const methodOverride = require ('method-override');
+
+
 const PORT = process.env.PORT || 3000
 
 //MUST BE FIRST
@@ -16,8 +22,8 @@ app.use((req,res,next)=>{
 })
 //keep this near the top
 app.use(express.urlencoded({extended:true}))
-
-
+app.use(methodOverride('_method'))
+app.use(express.static('public')); //tells express to try to match requests with files in the directory called 'public'
 
 
 //set up view engine
@@ -91,8 +97,40 @@ app.get('/fruits/:id', (req,res) =>{
     //There will be a variable avalible inside the ejs file called fruit, it vaule is fruits [req.params.indexOfFruitsArray]
 })
 
+//DELETE Route
+app.delete('/fruits/:id', (req,res) =>{
+    Fruit.findByIdAndRemove(req.params.id, (err,data) =>{
+        res.redirect('/fruits')
+    })
+})
 
-//new
+app.get('/fruits/:id/edit', (req,res) =>{
+    Fruit.findById(req.params.id, (err, foundFruit) =>{
+        if(!err){
+            res.render(
+                'Edit',
+                {
+                    fruit: foundFruit //pass in found fruit
+                }
+            )
+             } else{
+                res.send({msg: err.message})
+            }
+    })
+})
+
+app.put('/fruits/:id', (req, res)=>{
+    if(req.body.readyToEat === 'on'){
+        req.body.readyToEat = true;
+    } else {
+        req.body.readyToEat = false;
+    }
+    Fruit.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedModel)=>{
+        res.redirect('/fruits')
+    })
+})
+
+//mongoose connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.once('open', ()=> {

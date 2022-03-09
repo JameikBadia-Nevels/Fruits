@@ -6,8 +6,10 @@ class Show extends React.Component{
         const fruit = this.props.fruit
         return(
             <div>
+                 <link rel="stylesheet" href="/css/app.css"/>  
             <h1>Show Page</h1>
-           The {this.props.fruit.name} is {this.props.fruit.color} and is {this.props.fruit.readyToEat}
+           The {this.props.fruit.name} is {this.props.fruit.color} and is {this.props.fruit.readyToEat  ? ` It is ready to eat.` : ` It is not ready to eat.`
+}
             </div>
         )
     }
